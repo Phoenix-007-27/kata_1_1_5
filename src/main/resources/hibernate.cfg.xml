@@ -22,7 +22,9 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Automatically create/update the database schema -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
+
+
 
         <!-- Mapping files -->
         <!-- <mapping resource="com/example/YourEntity.hbm.xml"/> -->
