@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    Connection connection;
+    private Connection connection;
 
     {
         try {
@@ -67,7 +67,6 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * from Users");
             while (resultSet.next()) {
-//                Long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 String lastname = resultSet.getString("lastname");
                 Byte age = resultSet.getByte("age");
