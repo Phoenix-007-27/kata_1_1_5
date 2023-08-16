@@ -21,9 +21,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void createUsersTable() throws SQLException {
         try (Statement statement = connection.createStatement()) {
-
             connection.setAutoCommit(false);
-
             statement.execute("CREATE TABLE IF NOT EXISTS Users (id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR (255) NOT NULL," +
                     " lastname VARCHAR(255) NOT NULL, age TINYINT NOT NULL)");
             connection.commit();
@@ -75,11 +73,11 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
 
         try (Statement statement = connection.createStatement()) {
-            connection.setAutoCommit(true);
+            connection.setAutoCommit(false);
             ResultSet resultSet = statement.executeQuery("SELECT * from Users");
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
@@ -87,9 +85,10 @@ public class UserDaoJDBCImpl implements UserDao {
                 Byte age = resultSet.getByte("age");
 
                 users.add(new User(name, lastname, age));
-
+                connection.commit();
             }
         } catch (SQLException e) {
+            connection.rollback();
             throw new RuntimeException(e);
         }
 
