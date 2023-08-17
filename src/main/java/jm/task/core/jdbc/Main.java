@@ -28,16 +28,17 @@ public class Main {
 //        userService.saveUser("Sara", "Boyl", (byte) 28);
 //        userService.removeUserById(2);
 
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(User.class)
-                .buildSessionFactory();
+        SessionFactory sessionFactory = Util.HiberCon();
+//                new Configuration()
+//                .configure("hibernate.cfg.xml")
+//                .addAnnotatedClass(User.class)
+//                .buildSessionFactory();
 
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();
         User user = session.get(User.class, 3L);
-        user.setAge((byte) 31);
+        user.setAge((byte) 100);
 
         session.getTransaction().commit();
 
