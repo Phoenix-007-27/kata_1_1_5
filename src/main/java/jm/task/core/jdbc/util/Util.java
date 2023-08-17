@@ -14,12 +14,12 @@ public class Util {
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/kata", "root", "11111111");
     }
-    public static Session HiberCon(){
+
+    public static SessionFactory HiberCon() {
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(User.class)
                 .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        return session;
+        return sessionFactory;
     }
 }
